@@ -69,3 +69,20 @@
     }
   }
 }
+
+@media (max-width: map-get($windowSize, 'medium')) {
+  .convert-panel {
+    &__form {
+      flex-direction: column;
+      gap: map-get($spacing, '03');
+    }
+
+    &__field {
+      margin-bottom: map-get($spacing, '01');
+    }
+
+    &__flex-line:first-child {
+      flex-direction: column;
+    }
+  }
+}
