@@ -1,0 +1,12 @@
+@import '../../../base/variables';
+
+.details-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: map-get($spacing, '03');
+
+  a {
+    width: 200px;
+    align-self: flex-end;
+  }
+}
