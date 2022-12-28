@@ -1,1 +1,15 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'base/variables';
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: map-get($spacing, '02');
+
+  background-color: map-get($colors, 'dark-gray1');
+  color: map-get($colors, 'white');
+  font-family: Arial;
+  font-size: map-get($fontSize, '03');
+}
