@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of, tap } from 'rxjs';
 import { ConvertResponse, ListResponse, LiveResponse } from '../models/api.models';
@@ -28,21 +28,12 @@ export class ApiService {
         );
   }
 
-  // TODO: implement and remove mock returns
   public getConvert(amount: number, from: string, to: string): Observable<ConvertResponse> {
-    return of({
-      success: true,
-      query: {
-          from,
-          to,
-          amount: 132
-      },
-      info: {
-          timestamp: 123,
-          quote: 12
-      },
-      result: 123
-    });
+    const params = new HttpParams({ fromObject: {
+      from, to, amount: amount.toString()
+    }});
+
+    return this.http.get<ConvertResponse>(`${this.baseUrl}/convert`, { params });
   }
 
   // TODO: implement and remove mock returns

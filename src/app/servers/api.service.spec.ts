@@ -58,4 +58,31 @@ describe('ApiService', () => {
       http.expectNone('https://api.apilayer.com/currency_data/list');
     });
   });
+
+  it('should call convert api', () => {
+    const mockResponse = {
+      success: true,
+      query: {
+          from: 'USD',
+          to: 'EUR',
+          amount: 132
+      },
+      info: {
+          timestamp: 123,
+          quote: 12
+      },
+      result: 123
+    };
+
+    // Action
+    service.getConvert(1, 'USD', 'EUR').subscribe(response => {
+      // Assert
+      expect(response).toEqual(mockResponse);
+    });
+
+    // Assert
+    const req = http.expectOne('https://api.apilayer.com/currency_data/convert?from=USD&to=EUR&amount=1');
+    expect(req.request.method).toBe('GET');
+    req.flush(mockResponse);
+  });
 });
