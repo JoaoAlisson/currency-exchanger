@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { finalize } from 'rxjs';
+import { ApiService } from '../../servers/api.service';
 import { FormStateService } from '../../servers/form-state.service';
 
 @Component({
@@ -8,15 +10,23 @@ import { FormStateService } from '../../servers/form-state.service';
 })
 export class ConvertPanelComponent implements OnInit {
 
-  constructor(public formState: FormStateService) { }
+  public result: number | null = null;
+
+  constructor(public formState: FormStateService, private apiService: ApiService) { }
 
   // TODO: implementation
   public ngOnInit(): void {
   }
 
-  // TODO: implementation
   public convert(): void {
+    if(this.formState.form.valid) {
+      this.result = null;
 
+      this.apiService.getConvert(this.formState.ammount.value, this.formState.from.value, this.formState.to.value)
+        .subscribe(({ result }) => {
+          this.result = result;
+        });
+    }
   }
 
   public changeCurrencies(): void {

@@ -40,7 +40,7 @@
 
       <div class="convert-panel__flex-line">
         <div class="convert-panel__form-result block">
-          10 USD
+          {{ result | number : '1.2-2' }} {{ formState.to.value }}
         </div>
       </div>
     </div>
