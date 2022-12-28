@@ -15,3 +15,11 @@
     font-size: map-get($fontSize, '04');
   }
 }
+
+@media (max-width: map-get($windowSize, 'medium')) {
+  .popular-currencies {
+    display: flex;
+    flex-direction: column;
+    gap: map-get($spacing, '03');
+  }
+}
