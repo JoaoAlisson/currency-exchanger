@@ -16,7 +16,7 @@
       <div class="convert-panel__flex-line">
         <div class="convert-panel__field">
           <label for="from">From</label>
-          <select [formControl]="formState.from" id="from">
+          <select [formControl]="formState.from" id="from" [attr.disabled]="!formState.ammount.valid ? '' : null">
             <option *ngFor="let currency of currencies" [ngValue]="currency.value">
               {{ currency.value }} - {{ currency.description }}
             </option>
@@ -25,6 +25,7 @@
 
         <button
           (click)="changeCurrencies()"
+          [disabled]="!formState.ammount.valid"
           type="button"
           class="convert-panel__form-change-currencys">
           &#10234;
@@ -32,7 +33,7 @@
 
         <div class="convert-panel__field">
           <label for="to">To</label>
-          <select [formControl]="formState.to" id="to">
+          <select [formControl]="formState.to" id="to" [attr.disabled]="!formState.ammount.valid ? '' : null">
             <option *ngFor="let currency of currencies" [ngValue]="currency.value">
               {{ currency.value }} - {{ currency.description }}
             </option>
@@ -41,6 +42,7 @@
       </div>
 
       <button
+        [disabled]="!formState.form.valid"
         type="submit"
         class="convert-panel__form-convert main-button">
           Convert
