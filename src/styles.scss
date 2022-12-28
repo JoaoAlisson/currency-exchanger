@@ -21,3 +21,32 @@ body {
   overflow: hidden;
   min-height: map-get($spacing, '07');
 }
+
+input, select {
+  height: map-get($spacing, '07');
+  background-color: map-get($colors, 'dark-gray1');;
+  border: 1px solid map-get($colors, 'white');
+  border-radius: 4px;
+  color: map-get($colors, 'white');
+}
+
+input {
+  text-align: center;
+}
+
+.main-button {
+  display: inline-block;
+  background-color: map-get($colors, 'blue');
+  color: map-get($colors, 'white');;
+  border: 0;
+  border-radius: 2px;
+  height: map-get($spacing, '07');
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  padding: map-get($spacing, '03');
+}
+
+.main-button:disabled {
+  background-color: map-get($colors, 'blue2');
+}

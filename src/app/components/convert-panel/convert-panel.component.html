@@ -1,1 +1,47 @@
-<p>convert-panel works!</p>
+<div class="convert-panel">
+  <div class="convert-panel__title">Currency Exchanger</div>
+
+  <form class="convert-panel__form block">
+    <div class="convert-panel__form--col-1">
+      <div class="convert-panel__field">
+        <label for="amount">Amount</label>
+        <input type="number" id="amount" />
+      </div>
+      <div class="convert-panel__form-compare block">
+        11 USD = 1 EUR
+      </div>
+    </div>
+
+    <div class="convert-panel__form--col-2">
+      <div class="convert-panel__flex-line">
+        <div class="convert-panel__field">
+          <label for="from">From</label>
+          <select id="from"></select>
+        </div>
+
+        <button
+          type="button"
+          class="convert-panel__form-change-currencys">
+          &#10234;
+        </button>
+
+        <div class="convert-panel__field">
+          <label for="to">To</label>
+          <select id="to"></select>
+        </div>
+      </div>
+
+      <button
+        type="submit"
+        class="convert-panel__form-convert main-button">
+          Convert
+      </button>
+
+      <div class="convert-panel__flex-line">
+        <div class="convert-panel__form-result block">
+          10 USD
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,71 @@
+@import '../../../base/variables';
+
+.convert-panel {
+  margin-top: map-get($spacing, '04');
+
+  &__title {
+    font-size: map-get($fontSize, '03');
+    margin-bottom: map-get($spacing, '02');
+  }
+
+  &__form {
+    display: flex;
+    gap: map-get($spacing, '03');
+
+    &--col-1 {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    &--col-2 {
+      flex: 3;
+      display: flex;
+      flex-direction: column;
+      gap: map-get($spacing, '02');
+    }
+
+    &-compare, &-result {
+      height: map-get($spacing, '07');
+      text-align: center;
+    }
+
+    &-result {
+      font-size: map-get($fontSize, '04');
+      font-weight: bolder;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    &-change-currencys {
+      background-color: map-get($colors, 'dark-gray1');
+      color: map-get($colors, 'white');
+      height: map-get($spacing, '07');
+      padding: 0;
+      margin-top: map-get($spacing, '04');
+      font-size: map-get($fontSize, '06');
+      border: 0;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__flex-line {
+    display: flex;
+    gap: map-get($spacing, '03');
+
+    ::ng-deep > * {
+      flex: 1;
+    }
+  }
+}
