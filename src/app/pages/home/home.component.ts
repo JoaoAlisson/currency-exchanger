@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormStateService } from '../../servers/form-state.service';
 
 @Component({
   selector: 'app-home',
@@ -7,5 +8,5 @@ import { Component } from '@angular/core';
 })
 export class HomeComponent {
 
-  constructor() { }
+  constructor(public formState: FormStateService) { }
 }

@@ -1,2 +1,10 @@
-<app-convert-panel></app-convert-panel>
+<app-convert-panel>
+  <button
+    type="button"
+    class="main-button"
+    [disabled]="!formState.from.value || !formState.to.value"
+    [routerLink]="['/details', formState.from.value, formState.to.value]">
+      More Details
+  </button>
+</app-convert-panel>
 <app-popular-currencies-grid></app-popular-currencies-grid>

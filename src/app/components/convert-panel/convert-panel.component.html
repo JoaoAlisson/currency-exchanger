@@ -52,6 +52,8 @@
         <div class="convert-panel__form-result block">
           <span *appLoading="loadingResult">{{ result | number : '1.2-2' }}</span> {{ formState.to.value }}
         </div>
+
+        <ng-content></ng-content>
       </div>
     </div>
   </form>
