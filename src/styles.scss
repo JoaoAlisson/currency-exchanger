@@ -13,3 +13,11 @@ body {
   font-family: Arial;
   font-size: map-get($fontSize, '03');
 }
+
+.block {
+  border: 1px solid map-get($colors, 'white');
+  border-radius: 4px;
+  padding: map-get($spacing, '03');
+  overflow: hidden;
+  min-height: map-get($spacing, '07');
+}

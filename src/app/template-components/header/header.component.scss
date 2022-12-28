@@ -1,0 +1,33 @@
+@import '../../../base/variables';
+
+.main-menu {
+  padding: map-get($spacing, '03');
+
+  display: flex;
+  justify-content: space-between;
+
+  &__itens-container {
+    display: flex;
+    gap: map-get($spacing, '03');
+
+    li {
+      list-style: none;
+
+      a:link {
+        color:  map-get($colors, 'white');
+      }
+
+      a:visited {
+        color:  map-get($colors, 'white');
+      }
+
+      a:hover {
+        color: map-get($colors, 'blue');
+      }
+
+      a:active {
+        color: map-get($colors, 'blue');
+      }
+    }
+  }
+}
