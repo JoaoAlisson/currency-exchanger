@@ -108,4 +108,23 @@ describe('ConvertPanelComponent', () => {
     // Assert
     expect(component.unity).toBe(123);
   });
+
+  it('should convert value if form is valid on component init', () => {
+    // Arrange
+    spyOn(apiService, 'getConvert').and.returnValue(of({ result: 123 } as ConvertResponse));
+
+    formState.ammount.setValue(2);
+    formState.from.setValue('USD');
+    formState.to.setValue('EUR');
+
+    // Action
+    component.ngOnInit();
+
+    // Assert
+    // first time on convert function
+    expect(apiService.getConvert).toHaveBeenCalledWith(2, 'USD', 'EUR');
+
+    // second time on setUnityValue function
+    expect(apiService.getConvert).toHaveBeenCalledWith(1, 'USD', 'EUR');
+  });
 });

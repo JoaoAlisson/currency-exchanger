@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { combineLatest, finalize, switchMap, tap } from 'rxjs';
+import { combineLatest, finalize, Observable, of, switchMap, tap } from 'rxjs';
 import { ApiService } from '../../servers/api.service';
 import { FormStateService } from '../../servers/form-state.service';
 
@@ -21,6 +21,12 @@ export class ConvertPanelComponent implements OnInit {
   constructor(public formState: FormStateService, private apiService: ApiService) { }
 
   public ngOnInit(): void {
+    if(this.formState.form.valid) {
+      this.convert();
+
+      this.setUnityValue();
+    }
+
     this.loadCurrenciesList();
 
     this.setUnityValueOnCurrenciesChanges();
@@ -44,6 +50,9 @@ export class ConvertPanelComponent implements OnInit {
   }
 
   public changeCurrencies(): void {
+    this.result = null;
+    this.unity = null;
+
     const from = this.formState.from.value;
     const to = this.formState.to.value;
 
@@ -59,11 +68,22 @@ export class ConvertPanelComponent implements OnInit {
     });
   }
 
+  private setUnityValue(): void {
+    this.getUnityObservable(of({
+      from: this.formState.from.value,
+      to: this.formState.to.value
+    })).subscribe();
+  }
+
   private setUnityValueOnCurrenciesChanges(): void {
-    combineLatest({
+    this.getUnityObservable(combineLatest({
       from: this.formState.from.valueChanges,
       to: this.formState.to.valueChanges
-    }).pipe(
+    })).subscribe();
+  }
+
+  private getUnityObservable(observable: Observable<{ from: string, to: string }>): Observable<any> {
+    return observable.pipe(
         tap(() => {
           this.loadingUnity = true;
           this.unity = null;
@@ -75,7 +95,6 @@ export class ConvertPanelComponent implements OnInit {
         )),
         tap(({ result }) => {
           this.unity = result;
-        })
-      ).subscribe();
+        }));
   }
 }
