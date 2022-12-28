@@ -11,12 +11,12 @@ export class ApiService {
 
   // TODO: implement and remove mock returns
   public getList(): Observable<ListResponse> {
-    return of(
-        { currencies: {
-            USD: 'Dollar',
-            EUR: 'Euro',
-            BRL: 'Reais'
-          }
+    return of({
+      currencies: {
+        USD: 'Dollar',
+        EUR: 'Euro',
+        BRL: 'Reais'
+      }
     });
   }
 

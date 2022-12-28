@@ -74,4 +74,24 @@ describe('ConvertPanelComponent', () => {
     });
   });
 
+  it('should load currencies list', () => {
+    // Arrange
+    spyOn(apiService, 'getList').and.returnValue(of({
+      currencies: {
+        USD: 'Dollar',
+        EUR: 'Euro',
+        BRL: 'Reais'
+      }
+    }));
+
+    // Action
+    component.ngOnInit();
+
+    // Assert
+    expect(component.currencies).toEqual([
+      { value: 'USD', description: 'Dollar' },
+      { value: 'EUR', description: 'Euro' },
+      { value: 'BRL', description: 'Reais' }
+    ]);
+  });
 });

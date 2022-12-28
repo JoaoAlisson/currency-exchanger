@@ -12,10 +12,12 @@ export class ConvertPanelComponent implements OnInit {
 
   public result: number | null = null;
 
+  public currencies: { value: string, description: string }[] = [];
+
   constructor(public formState: FormStateService, private apiService: ApiService) { }
 
-  // TODO: implementation
   public ngOnInit(): void {
+    this.loadCurrenciesList();
   }
 
   public convert(): void {
@@ -35,5 +37,13 @@ export class ConvertPanelComponent implements OnInit {
 
     this.formState.from.setValue(to);
     this.formState.to.setValue(from);
+  }
+
+  private loadCurrenciesList(): void {
+    this.apiService.getList().subscribe(({ currencies }) => {
+      this.currencies = Object.entries(currencies).map(([value, description]) => ({
+        value, description
+      }));
+    });
   }
 }

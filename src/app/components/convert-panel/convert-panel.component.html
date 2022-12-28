@@ -16,7 +16,11 @@
       <div class="convert-panel__flex-line">
         <div class="convert-panel__field">
           <label for="from">From</label>
-          <select [formControl]="formState.from" id="from"></select>
+          <select [formControl]="formState.from" id="from">
+            <option *ngFor="let currency of currencies" [ngValue]="currency.value">
+              {{ currency.value }} - {{ currency.description }}
+            </option>
+          </select>
         </div>
 
         <button
@@ -28,7 +32,11 @@
 
         <div class="convert-panel__field">
           <label for="to">To</label>
-          <select [formControl]="formState.to" id="to"></select>
+          <select [formControl]="formState.to" id="to">
+            <option *ngFor="let currency of currencies" [ngValue]="currency.value">
+              {{ currency.value }} - {{ currency.description }}
+            </option>
+          </select>
         </div>
       </div>
 
