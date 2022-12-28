@@ -13,3 +13,10 @@
     background-color: map-get($colors, 'white');
   }
 }
+
+@media (max-width: map-get($windowSize, 'medium')) {
+  .historical-rates-chart {
+    flex-direction: column;
+    gap: map-get($spacing, '01');
+  }
+}
