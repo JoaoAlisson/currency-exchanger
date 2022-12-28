@@ -18,4 +18,12 @@ export class ConvertPanelComponent implements OnInit {
   public convert(): void {
 
   }
+
+  public changeCurrencies(): void {
+    const from = this.formState.from.value;
+    const to = this.formState.to.value;
+
+    this.formState.from.setValue(to);
+    this.formState.to.setValue(from);
+  }
 }
