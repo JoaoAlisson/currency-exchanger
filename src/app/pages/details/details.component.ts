@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ApiService } from '../../servers/api.service';
 import { FormStateService } from '../../servers/form-state.service';
 
 @Component({
@@ -8,7 +9,11 @@ import { FormStateService } from '../../servers/form-state.service';
   styleUrls: ['./details.component.scss']
 })
 export class DetailsComponent {
-  constructor(private formState: FormStateService, private route: ActivatedRoute) { }
+  public title = '';
+
+  constructor(private formState: FormStateService,
+    private route: ActivatedRoute,
+    private apiService: ApiService) { }
 
   public ngOnInit(): void {
     this.route.params.subscribe(({ from, to }) => {
@@ -18,6 +23,14 @@ export class DetailsComponent {
 
       this.formState.from.setValue(from);
       this.formState.to.setValue(to);
+
+      this.setTitle();
+    });
+  }
+
+  private setTitle(): void {
+    this.apiService.getList().subscribe(({ currencies }) => {
+      this.title = currencies[this.formState.from.value];
     });
   }
 }

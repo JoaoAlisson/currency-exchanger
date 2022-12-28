@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { combineLatest, finalize, Observable, of, switchMap, tap } from 'rxjs';
 import { ApiService } from '../../servers/api.service';
 import { FormStateService } from '../../servers/form-state.service';
@@ -9,6 +9,8 @@ import { FormStateService } from '../../servers/form-state.service';
   styleUrls: ['./convert-panel.component.scss']
 })
 export class ConvertPanelComponent implements OnInit {
+
+  @Input() public title = '';
 
   public result: number | null = null;
   public unity: number | null = null;

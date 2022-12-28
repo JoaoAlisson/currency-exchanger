@@ -37,6 +37,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      gap: map-get($spacing, '01');
     }
 
     &-change-currencys {
