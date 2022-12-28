@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { ApiService } from './api.service';
+import { of } from 'rxjs';
 
 describe('ApiService', () => {
   let service: ApiService;
@@ -108,5 +109,46 @@ describe('ApiService', () => {
     const req = http.expectOne('https://api.apilayer.com/currency_data/live?source=USD&currencies=EUR,BRL');
     expect(req.request.method).toBe('GET');
     req.flush(mockResponse);
+  });
+
+  it('should call historical api', () => {
+    const mockResponse = {
+      quotes: {
+        USDBRL: 5.218977,
+        USDEUR: 0.94005,
+        USDUSD: 1
+      },
+      source: "USD",
+      success: true,
+      timestamp: 1672093503
+    };
+
+    // Action
+    service.getHistorical('2022-01-01', 'USD', ['EUR']).subscribe(response => {
+      // Assert
+      expect(response).toEqual(mockResponse);
+    });
+
+    // Assert
+    const req = http.expectOne('https://api.apilayer.com/currency_data/historical?date=2022-01-01&source=USD&currencies=EUR');
+    expect(req.request.method).toBe('GET');
+    req.flush(mockResponse);
+  });
+
+  it('should getYearHistorical', () => {
+    const mockResponse = {
+      quotes: {
+        USDEUR: 0.94005,
+      },
+      source: "USD",
+      success: true,
+      timestamp: 1672093503
+    };
+
+    spyOn(service, 'getHistorical').and.returnValue(of(mockResponse));
+
+    service.getYearHistorical('USD', 2022).subscribe(values => {
+      expect(values).toEqual([1,1,1,1,1,1,1,1,1,1,1,1]);
+    });
   });
 });

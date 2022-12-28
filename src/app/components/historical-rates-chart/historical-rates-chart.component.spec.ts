@@ -46,7 +46,7 @@ describe('HistoricalRatesChartComponent', () => {
       }
     }));
 
-    spyOn(apiService, 'getHistorical').and.returnValue(of(
+    spyOn(apiService, 'getYearHistorical').and.returnValue(of(
       [1,2,3,4,5,6,7,8,9,10,11,12]
     ));
   });

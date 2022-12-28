@@ -43,7 +43,7 @@ export class HistoricalRatesChartComponent implements OnInit {
       tap(({ currencies }) => {
         this.fromCurrencyDescription = `${currency} - ${currencies[currency]} | Year: ${this.previousYear}`;
       }),
-      switchMap(() => this.apiService.getHistorical(currency, [currency], this.previousYear as number))
+      switchMap(() => this.apiService.getYearHistorical(currency, this.previousYear as number))
     ).subscribe(data => {
       this.fromChartData = data;
     });
@@ -61,7 +61,7 @@ export class HistoricalRatesChartComponent implements OnInit {
       tap(({ currencies }) => {
         this.toCurrencyDescription = `${currency} - ${currencies[currency]} | Year: ${this.previousYear}`;
       }),
-      switchMap(() => this.apiService.getHistorical(currency, [currency], this.previousYear as number))
+      switchMap(() => this.apiService.getYearHistorical(currency, this.previousYear as number))
     ).subscribe(data => {
       this.toChartData = data;
     });
