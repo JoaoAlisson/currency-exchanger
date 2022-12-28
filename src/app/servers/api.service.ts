@@ -36,18 +36,13 @@ export class ApiService {
     return this.http.get<ConvertResponse>(`${this.baseUrl}/convert`, { params });
   }
 
-  // TODO: implement and remove mock returns
   public getLive(source: string, currencies: string[]): Observable<LiveResponse> {
-    return of({
-      quotes: {
-        USDBRL: 5.218977,
-        USDEUR: 0.94005,
-        USDUSD: 1
-      },
-      source: "USD",
-      success: true,
-      timestamp: 1672093503
-    });
+    const params = new HttpParams({ fromObject: {
+      source,
+      currencies: currencies.join(',')
+    }});
+
+    return this.http.get<LiveResponse>(`${this.baseUrl}/live`, { params });
   }
 
   // TODO: implement and remove mock returns

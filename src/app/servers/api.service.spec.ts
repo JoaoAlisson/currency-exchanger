@@ -85,4 +85,28 @@ describe('ApiService', () => {
     expect(req.request.method).toBe('GET');
     req.flush(mockResponse);
   });
+
+  it('should call live api', () => {
+    const mockResponse = {
+      quotes: {
+        USDBRL: 5.218977,
+        USDEUR: 0.94005,
+        USDUSD: 1
+      },
+      source: "USD",
+      success: true,
+      timestamp: 1672093503
+    };
+
+    // Action
+    service.getLive('USD', ['EUR', 'BRL']).subscribe(response => {
+      // Assert
+      expect(response).toEqual(mockResponse);
+    });
+
+    // Assert
+    const req = http.expectOne('https://api.apilayer.com/currency_data/live?source=USD&currencies=EUR,BRL');
+    expect(req.request.method).toBe('GET');
+    req.flush(mockResponse);
+  });
 });
