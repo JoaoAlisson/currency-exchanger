@@ -1,8 +1,16 @@
-<div style="text-align:center">
-  <apx-chart
-    [series]="chartOptions.series"
-    [chart]="chartOptions.chart"
-    [xaxis]="chartOptions.xaxis"
-    [title]="chartOptions.title"
-  ></apx-chart>
+<div class="historical-rates-chart">
+  <div class="historical-rates-chart__col">
+    <app-year-chart
+      *appLoading="!fromChartData.length;prefix:'Loading'"
+      [data]="fromChartData" [title]="fromCurrencyDescription"
+      [seriesName]="formState.from.value">
+    </app-year-chart>
+  </div>
+  <div class="historical-rates-chart__col">
+    <app-year-chart
+      *appLoading="!toChartData.length;prefix:'Loading'"
+      [data]="toChartData" [title]="toCurrencyDescription"
+      [seriesName]="formState.to.value">
+    </app-year-chart>
+  </div>
 </div>

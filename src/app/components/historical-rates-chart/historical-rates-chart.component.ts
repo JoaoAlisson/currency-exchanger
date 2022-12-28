@@ -1,45 +1,69 @@
-import { Component, ViewChild } from '@angular/core';
-import {
-  ChartComponent,
-  ApexAxisChartSeries,
-  ApexChart,
-  ApexXAxis,
-  ApexTitleSubtitle
-} from "ng-apexcharts";
-
-export type ChartOptions = {
-  series: ApexAxisChartSeries;
-  chart: ApexChart;
-  xaxis: ApexXAxis;
-  title: ApexTitleSubtitle;
-};
-
+import { Component, OnInit } from '@angular/core';
+import { Observable, of, switchMap, tap } from 'rxjs';
+import { ApiService } from '../../servers/api.service';
+import { FormStateService } from '../../servers/form-state.service';
 @Component({
   selector: 'app-historical-rates-chart',
   templateUrl: './historical-rates-chart.component.html',
   styleUrls: ['./historical-rates-chart.component.scss']
 })
-export class HistoricalRatesChartComponent {
+export class HistoricalRatesChartComponent implements OnInit {
 
-  @ViewChild("chart") chart: ChartComponent | null = null;
-  public chartOptions: ChartOptions = {
-    series: [
-      {
-        name: "My-series",
-        data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
-      }
-    ],
-    chart: {
-      height: 350,
-      type: "bar"
-    },
-    title: {
-      text: "My First Angular Chart"
-    },
-    xaxis: {
-      categories: ["Jan", "Feb",  "Mar",  "Apr",  "May",  "Jun",  "Jul",  "Aug", "Sep"]
-    }
-  } as any;
+  public fromChartData: number[] = [];
+  public toChartData: number[] = [];
 
-  constructor() { }
+  public fromCurrencyDescription = '';
+  public toCurrencyDescription = '';
+
+  private previousYear: number | null = null;
+
+  constructor(public formState: FormStateService, private apiService: ApiService) { }
+
+  public ngOnInit(): void {
+    this.previousYear = (new Date()).getFullYear() - 1;
+
+    this.updateFromData(of(this.formState.from.value));
+
+    this.updateToData(of(this.formState.to.value));
+
+    this.updateFromData(this.formState.from.valueChanges);
+
+    this.updateToData(this.formState.to.valueChanges);
+  }
+
+  private updateFromData(observable: Observable<string>): void {
+    let currency: string;
+
+    observable.pipe(
+      tap(value => {
+        currency = value;
+        this.fromChartData = [];
+      }),
+      switchMap(() => this.apiService.getList()),
+      tap(({ currencies }) => {
+        this.fromCurrencyDescription = `${currency} - ${currencies[currency]} | Year: ${this.previousYear}`;
+      }),
+      switchMap(() => this.apiService.getHistorical(currency, [currency], this.previousYear as number))
+    ).subscribe(data => {
+      this.fromChartData = data;
+    });
+  }
+
+  private updateToData(observable: Observable<string>): void {
+    let currency: string;
+
+    observable.pipe(
+      tap(value => {
+        currency = value;
+        this.toChartData = [];
+      }),
+      switchMap(() => this.apiService.getList()),
+      tap(({ currencies }) => {
+        this.toCurrencyDescription = `${currency} - ${currencies[currency]} | Year: ${this.previousYear}`;
+      }),
+      switchMap(() => this.apiService.getHistorical(currency, [currency], this.previousYear as number))
+    ).subscribe(data => {
+      this.toChartData = data;
+    });
+  }
 }

@@ -1,0 +1,15 @@
+@import '../../../base/variables';
+
+.historical-rates-chart {
+  display: flex;
+  margin-top: map-get($spacing, '06');
+  color: map-get($colors, 'dark-gray1');
+  gap: map-get($spacing, '01');
+  min-height: 100px;
+
+  > * {
+    flex: 1;
+    border-radius: 4px;
+    background-color: map-get($colors, 'white');
+  }
+}

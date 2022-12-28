@@ -50,4 +50,9 @@ export class ApiService {
       timestamp: 1672093503
     });
   }
+
+  // TODO: implement and remove mock returns
+  public getHistorical(source: string, currencies: string[], year: number): Observable<number[]> {
+    return of([1,2,3,4,5,6,7,8,9,10,11,12]);
+  }
 }

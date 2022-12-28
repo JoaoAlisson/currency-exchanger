@@ -14,6 +14,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LoadingDirective } from './directives/loading.directive';
 import { LoadingComponent } from './template-components/loading/loading.component';
 import { NgApexchartsModule } from "ng-apexcharts";
+import { YearChartComponent } from './components/year-chart/year-chart.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { NgApexchartsModule } from "ng-apexcharts";
     HistoricalRatesChartComponent,
     PopularCurrenciesGridComponent,
     LoadingDirective,
-    LoadingComponent
+    LoadingComponent,
+    YearChartComponent
   ],
   imports: [
     BrowserModule,
