@@ -7,6 +7,9 @@ import { HomeComponent } from './pages/home/home.component';
 import { DetailsComponent } from './pages/details/details.component';
 import { HeaderComponent } from './template-components/header/header.component';
 import { FooterComponent } from './template-components/footer/footer.component';
+import { ConvertPanelComponent } from './components/convert-panel/convert-panel.component';
+import { HistoricalRatesChartComponent } from './components/historical-rates-chart/historical-rates-chart.component';
+import { PopularCurrenciesGridComponent } from './components/popular-currencies-grid/popular-currencies-grid.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +17,10 @@ import { FooterComponent } from './template-components/footer/footer.component';
     HomeComponent,
     DetailsComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    ConvertPanelComponent,
+    HistoricalRatesChartComponent,
+    PopularCurrenciesGridComponent
   ],
   imports: [
     BrowserModule,
