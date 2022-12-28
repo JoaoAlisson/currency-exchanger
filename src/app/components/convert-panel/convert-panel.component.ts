@@ -28,6 +28,8 @@ export class ConvertPanelComponent implements OnInit {
     if(this.formState.form.valid) {
       this.result = null;
 
+      this.formState.convert$.next(true);
+
       this.apiService.getConvert(this.formState.ammount.value, this.formState.from.value, this.formState.to.value)
         .subscribe(({ result }) => {
           this.result = result;

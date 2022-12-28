@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ReplaySubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,8 @@ export class FormStateService {
     from: this.from,
     to: this.to,
   });
+
+  public convert$ = new ReplaySubject();
 
   constructor() { }
 }

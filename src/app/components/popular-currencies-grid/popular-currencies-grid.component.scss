@@ -1,0 +1,17 @@
+@import '../../../base/variables';
+
+.popular-currencies {
+  display: grid;
+  margin-top: map-get($spacing, '03');
+  gap: map-get($spacing, '03');
+  grid-template-columns: repeat(3, auto);
+  min-height: 300px;
+  width: 100%;
+
+  > * {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: map-get($fontSize, '04');
+  }
+}

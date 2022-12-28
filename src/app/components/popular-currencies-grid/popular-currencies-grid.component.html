@@ -1,1 +1,5 @@
-<p>popular-currencies-grid works!</p>
+<div class="popular-currencies">
+  <div *ngFor="let currency of currencies" class="block">
+    {{ currency.currency }} = {{ currency.value | number : '1.2-2' }}
+  </div>
+</div>

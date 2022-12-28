@@ -27,3 +27,9 @@ export interface ListResponse {
     [key: string]: string
   }
 }
+
+export enum MainCurrencies {
+  USD = 'USD',
+  EUR = 'EUR',
+  BRL = 'BRL'
+}
