@@ -8,7 +8,7 @@
         <input [formControl]="formState.ammount" type="number" id="amount" />
       </div>
       <div class="convert-panel__form-compare block">
-        11 USD = 1 EUR
+        1.00 {{ formState.from.value }} = {{ unity | number : '1.2-2' }} {{ formState.to.value }}
       </div>
     </div>
 

@@ -94,4 +94,18 @@ describe('ConvertPanelComponent', () => {
       { value: 'BRL', description: 'Reais' }
     ]);
   });
+
+  it('should set unity value on change currencies values', () => {
+    // Arrange
+    spyOn(apiService, 'getConvert').and.returnValue(of({ result: 123 } as ConvertResponse));
+
+    component.ngOnInit();
+
+    // Action
+    formState.from.setValue('USD');
+    formState.to.setValue('EUR');
+
+    // Assert
+    expect(component.unity).toBe(123);
+  });
 });

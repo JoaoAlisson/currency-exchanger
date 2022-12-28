@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { finalize } from 'rxjs';
+import { combineLatest, finalize, switchMap, tap } from 'rxjs';
 import { ApiService } from '../../servers/api.service';
 import { FormStateService } from '../../servers/form-state.service';
 
@@ -12,12 +12,16 @@ export class ConvertPanelComponent implements OnInit {
 
   public result: number | null = null;
 
+  public unity: number | null = null;
+
   public currencies: { value: string, description: string }[] = [];
 
   constructor(public formState: FormStateService, private apiService: ApiService) { }
 
   public ngOnInit(): void {
     this.loadCurrenciesList();
+
+    this.setUnityValueOnCurrenciesChanges();
   }
 
   public convert(): void {
@@ -45,5 +49,20 @@ export class ConvertPanelComponent implements OnInit {
         value, description
       }));
     });
+  }
+
+  private setUnityValueOnCurrenciesChanges(): void {
+    combineLatest({
+      from: this.formState.from.valueChanges,
+      to: this.formState.to.valueChanges
+    }).pipe(
+        tap(() => {
+          this.unity = null;
+        }),
+        switchMap(({ from, to }) => this.apiService.getConvert(1, from, to)),
+        tap(({ result }) => {
+          this.unity = result;
+        })
+      ).subscribe();
   }
 }
