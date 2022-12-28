@@ -8,7 +8,7 @@
         <input [formControl]="formState.ammount" type="number" id="amount" />
       </div>
       <div class="convert-panel__form-compare block">
-        1.00 {{ formState.from.value }} = {{ unity | number : '1.2-2' }} {{ formState.to.value }}
+        1.00 {{ formState.from.value }} = <span *appLoading="loadingUnity">{{ unity | number : '1.2-2' }}</span> {{ formState.to.value }}
       </div>
     </div>
 
@@ -50,7 +50,7 @@
 
       <div class="convert-panel__flex-line">
         <div class="convert-panel__form-result block">
-          {{ result | number : '1.2-2' }} {{ formState.to.value }}
+          <span *appLoading="loadingResult">{{ result | number : '1.2-2' }}</span> {{ formState.to.value }}
         </div>
       </div>
     </div>

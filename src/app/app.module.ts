@@ -11,6 +11,8 @@ import { ConvertPanelComponent } from './components/convert-panel/convert-panel.
 import { HistoricalRatesChartComponent } from './components/historical-rates-chart/historical-rates-chart.component';
 import { PopularCurrenciesGridComponent } from './components/popular-currencies-grid/popular-currencies-grid.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { LoadingDirective } from './directives/loading.directive';
+import { LoadingComponent } from './template-components/loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     FooterComponent,
     ConvertPanelComponent,
     HistoricalRatesChartComponent,
-    PopularCurrenciesGridComponent
+    PopularCurrenciesGridComponent,
+    LoadingDirective,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,

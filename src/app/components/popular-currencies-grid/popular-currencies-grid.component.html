@@ -1,4 +1,4 @@
-<div class="popular-currencies">
+<div class="popular-currencies" *appLoading="loading;prefix:'Loading'">
   <div *ngFor="let currency of currencies" class="block">
     {{ currency.currency }} = {{ currency.value | number : '1.2-2' }}
   </div>

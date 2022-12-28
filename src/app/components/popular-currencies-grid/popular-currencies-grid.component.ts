@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ReplaySubject, switchMap, takeUntil, tap } from 'rxjs';
+import { finalize, ReplaySubject, switchMap, takeUntil, tap } from 'rxjs';
 import { MainCurrencies } from '../../models/api.models';
 import { ApiService } from '../../servers/api.service';
 import { FormStateService } from '../../servers/form-state.service';
@@ -24,6 +24,8 @@ const POPULAR_CURRENCIES: string[] = [
 })
 export class PopularCurrenciesGridComponent implements OnInit, OnDestroy {
 
+  public loading = false;
+
   public currencies: { currency: string, value: number }[] = [];
 
   private destroyed$ = new ReplaySubject(1);
@@ -33,9 +35,14 @@ export class PopularCurrenciesGridComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this.formState.convert$.asObservable().pipe(
       tap(() => {
+        this.loading = true;
         this.currencies = [];
       }),
-      switchMap(() => this.apiService.getLive(this.formState.from.value, POPULAR_CURRENCIES)),
+      switchMap(() => this.apiService.getLive(this.formState.from.value, POPULAR_CURRENCIES).pipe(
+        finalize(() => {
+          this.loading = false;
+        }),
+      )),
       takeUntil(this.destroyed$)
     ).subscribe(({ quotes }) => {
       POPULAR_CURRENCIES.forEach(currency => {

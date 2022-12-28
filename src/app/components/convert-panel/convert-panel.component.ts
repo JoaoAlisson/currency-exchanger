@@ -11,8 +11,10 @@ import { FormStateService } from '../../servers/form-state.service';
 export class ConvertPanelComponent implements OnInit {
 
   public result: number | null = null;
-
   public unity: number | null = null;
+
+  public loadingUnity = false;
+  public loadingResult = false;
 
   public currencies: { value: string, description: string }[] = [];
 
@@ -26,11 +28,15 @@ export class ConvertPanelComponent implements OnInit {
 
   public convert(): void {
     if(this.formState.form.valid) {
+      this.loadingResult = true;
       this.result = null;
 
       this.formState.convert$.next(true);
 
       this.apiService.getConvert(this.formState.ammount.value, this.formState.from.value, this.formState.to.value)
+        .pipe(finalize(() => {
+          this.loadingResult = false;
+        }))
         .subscribe(({ result }) => {
           this.result = result;
         });
@@ -59,9 +65,14 @@ export class ConvertPanelComponent implements OnInit {
       to: this.formState.to.valueChanges
     }).pipe(
         tap(() => {
+          this.loadingUnity = true;
           this.unity = null;
         }),
-        switchMap(({ from, to }) => this.apiService.getConvert(1, from, to)),
+        switchMap(({ from, to }) => this.apiService.getConvert(1, from, to).pipe(
+          finalize(() => {
+            this.loadingUnity = false;
+          })
+        )),
         tap(({ result }) => {
           this.unity = result;
         })
