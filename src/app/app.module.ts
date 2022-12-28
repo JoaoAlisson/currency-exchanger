@@ -10,6 +10,7 @@ import { FooterComponent } from './template-components/footer/footer.component';
 import { ConvertPanelComponent } from './components/convert-panel/convert-panel.component';
 import { HistoricalRatesChartComponent } from './components/historical-rates-chart/historical-rates-chart.component';
 import { PopularCurrenciesGridComponent } from './components/popular-currencies-grid/popular-currencies-grid.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { PopularCurrenciesGridComponent } from './components/popular-currencies-
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

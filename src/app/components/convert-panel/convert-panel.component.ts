@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormStateService } from '../../servers/form-state.service';
 
 @Component({
   selector: 'app-convert-panel',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConvertPanelComponent implements OnInit {
 
-  constructor() { }
+  constructor(public formState: FormStateService) { }
 
-  ngOnInit(): void {
+  // TODO: implementation
+  public ngOnInit(): void {
   }
 
+  // TODO: implementation
+  public convert(): void {
+
+  }
 }
