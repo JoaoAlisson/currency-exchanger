@@ -13,6 +13,7 @@ import { PopularCurrenciesGridComponent } from './components/popular-currencies-
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoadingDirective } from './directives/loading.directive';
 import { LoadingComponent } from './template-components/loading/loading.component';
+import { NgApexchartsModule } from "ng-apexcharts";
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { LoadingComponent } from './template-components/loading/loading.componen
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgApexchartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
