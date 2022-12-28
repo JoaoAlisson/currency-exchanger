@@ -1,3 +1,4 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
 import { ApiService } from '../../servers/api.service';
@@ -21,6 +22,7 @@ describe('HistoricalRatesChartComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
       declarations: [ HistoricalRatesChartComponent ]
     })
     .compileComponents();

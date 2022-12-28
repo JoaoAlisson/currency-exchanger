@@ -31,5 +31,11 @@ export interface ListResponse {
 export enum MainCurrencies {
   USD = 'USD',
   EUR = 'EUR',
-  BRL = 'BRL'
+  EGP = 'EGP',
+  GBP = 'GBP',
+  AED = 'AED',
+  BTC = 'BTC',
+  BRL = 'BRL',
+  YER = 'YER',
+  XAU = 'XAU'
 }

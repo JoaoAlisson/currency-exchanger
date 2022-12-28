@@ -8,13 +8,13 @@ import { FormStateService } from '../../servers/form-state.service';
 const POPULAR_CURRENCIES: string[] = [
   MainCurrencies.USD,
   MainCurrencies.EUR,
+  MainCurrencies.EGP,
+  MainCurrencies.GBP,
+  MainCurrencies.AED,
+  MainCurrencies.BTC,
   MainCurrencies.BRL,
-  MainCurrencies.USD,
-  MainCurrencies.EUR,
-  MainCurrencies.BRL,
-  MainCurrencies.USD,
-  MainCurrencies.EUR,
-  MainCurrencies.BRL,
+  MainCurrencies.YER,
+  MainCurrencies.XAU,
 ];
 
 @Component({

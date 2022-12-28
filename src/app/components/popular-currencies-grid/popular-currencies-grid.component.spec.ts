@@ -1,3 +1,4 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
 import { ApiService } from '../../servers/api.service';
@@ -13,6 +14,7 @@ describe('PopularCurrenciesGridComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
       declarations: [ PopularCurrenciesGridComponent ]
     })
     .compileComponents();
@@ -35,9 +37,15 @@ describe('PopularCurrenciesGridComponent', () => {
     // Arrange
     spyOn(apiService, 'getLive').and.returnValue(of({
       quotes: {
-        USDBRL: 5.218977,
+        USDUSD: 1,
         USDEUR: 0.94005,
-        USDUSD: 1
+        USDEGP: 0,
+        USDGBP: 0,
+        USDAED: 0,
+        USDBTC: 0,
+        USDBRL: 0,
+        USDYER: 0,
+        USDXAU: 0
       },
       source: "USD",
       success: true,
@@ -55,13 +63,13 @@ describe('PopularCurrenciesGridComponent', () => {
     expect(component.currencies).toEqual([
       { currency: 'USD', value: 0 },
       { currency: 'EUR', value: 0 },
+      { currency: 'EGP', value: 0 },
+      { currency: 'GBP', value: 0 },
+      { currency: 'AED', value: 0 },
+      { currency: 'BTC', value: 0 },
       { currency: 'BRL', value: 0 },
-      { currency: 'USD', value: 0 },
-      { currency: 'EUR', value: 0 },
-      { currency: 'BRL', value: 0 },
-      { currency: 'USD', value: 0 },
-      { currency: 'EUR', value: 0 },
-      { currency: 'BRL', value: 0 },
+      { currency: 'YER', value: 0 },
+      { currency: 'XAU', value: 0 },
     ]);
   });
 });

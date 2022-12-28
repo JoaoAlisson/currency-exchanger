@@ -1,3 +1,4 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
 import { ConvertResponse } from '../../models/api.models';
@@ -14,7 +15,8 @@ describe('ConvertPanelComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ConvertPanelComponent ]
+      imports: [HttpClientTestingModule],
+      declarations: [ConvertPanelComponent]
     })
     .compileComponents();
   });
@@ -26,6 +28,16 @@ describe('ConvertPanelComponent', () => {
 
     formState = TestBed.inject(FormStateService);
     apiService = TestBed.inject(ApiService);
+  });
+
+  beforeEach(() => {
+    spyOn(apiService, 'getList').and.returnValue(of({
+      currencies: {
+        USD: 'Dollar',
+        EUR: 'Euro',
+        BRL: 'Reais'
+      }
+    }));
   });
 
   it('should create', () => {
@@ -75,15 +87,6 @@ describe('ConvertPanelComponent', () => {
   });
 
   it('should load currencies list', () => {
-    // Arrange
-    spyOn(apiService, 'getList').and.returnValue(of({
-      currencies: {
-        USD: 'Dollar',
-        EUR: 'Euro',
-        BRL: 'Reais'
-      }
-    }));
-
     // Action
     component.ngOnInit();
 

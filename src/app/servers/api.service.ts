@@ -1,5 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, of, tap } from 'rxjs';
 import { ConvertResponse, ListResponse, LiveResponse } from '../models/api.models';
 
 @Injectable({
@@ -7,17 +8,24 @@ import { ConvertResponse, ListResponse, LiveResponse } from '../models/api.model
 })
 export class ApiService {
 
-  constructor() { }
+  private baseUrl = 'https://api.apilayer.com/currency_data';
 
-  // TODO: implement and remove mock returns
+  constructor(private http: HttpClient) { }
+
+  /*
+  * get currency list from api and set in localStorage on the first time
+  * if list is on localStorage don't call api
+  */
   public getList(): Observable<ListResponse> {
-    return of({
-      currencies: {
-        USD: 'Dollar',
-        EUR: 'Euro',
-        BRL: 'Reais'
-      }
-    });
+    const listString = localStorage.getItem('currencyList');
+
+    return listString
+      ? of(JSON.parse(listString))
+      : this.http.get<ListResponse>(`${this.baseUrl}/list`).pipe(
+          tap((list: any) => {
+            localStorage.setItem('currencyList', JSON.stringify(list));
+          })
+        );
   }
 
   // TODO: implement and remove mock returns

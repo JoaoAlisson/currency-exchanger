@@ -15,7 +15,7 @@ import { LoadingDirective } from './directives/loading.directive';
 import { LoadingComponent } from './template-components/loading/loading.component';
 import { NgApexchartsModule } from "ng-apexcharts";
 import { YearChartComponent } from './components/year-chart/year-chart.component';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ApilayerInterceptor } from './interceptors/apilayer.interceptor';
 
 @NgModule({
@@ -34,6 +34,7 @@ import { ApilayerInterceptor } from './interceptors/apilayer.interceptor';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     ReactiveFormsModule,
     NgApexchartsModule
